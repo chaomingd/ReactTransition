@@ -56,3 +56,19 @@
   margin-bottom: 15px;
   margin-top: 15px;
 }
+
+.grid {
+  width: 266px;
+  margin-bottom: 15px;
+}
+
+.grid-item {
+  vertical-align: top;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  font-size: 12px;
+}

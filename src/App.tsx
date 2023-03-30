@@ -27,7 +27,7 @@ const Flip = {
   play(els: HTMLElement[]) {
     setTimeout(() => {
       els.forEach((el) => {
-        el.style.transition = 'all 300ms';
+        el.style.transition = 'all 500ms';
         el.style.removeProperty('transform');
         el.ontransitionend = () => {
           el.style.removeProperty('transition');
@@ -39,11 +39,17 @@ const Flip = {
 };
 
 function FlipApp() {
-  const [list, updateList] = useState([1, 2, 3, 4, 5, 6]);
-  const ulRef = useRef<HTMLUListElement | null>(null);
+  const [list, updateList] = useState(() => {
+    const list: any[] = [];
+    for (let i = 0; i < 64; i++) {
+      list.push(i);
+    }
+    return list;
+  });
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const showFlipAnimationRef = useRef(false);
   const shuff = () => {
-    Flip.first(Array.from(ulRef.current!.children) as HTMLElement[]);
+    Flip.first(Array.from(containerRef.current!.children) as HTMLElement[]);
     showFlipAnimationRef.current = true;
     updateList(
       list.slice().sort((a, b) => {
@@ -54,7 +60,7 @@ function FlipApp() {
 
   useLayoutEffect(() => {
     if (showFlipAnimationRef.current) {
-      const lis = Array.from(ulRef.current!.children) as HTMLElement[];
+      const lis = Array.from(containerRef.current!.children) as HTMLElement[];
       Flip.lastAndInvert(lis);
       Flip.play(lis);
       showFlipAnimationRef.current = false;
@@ -62,11 +68,11 @@ function FlipApp() {
   }, [list]);
   return (
     <div>
-      <ul ref={ulRef}>
+      <div className="grid" ref={containerRef}>
         {list.map((item) => {
-          return <li key={item + ''}>{item}</li>;
+          return <div className="grid-item" key={item + ''}>{item}</div>;
         })}
-      </ul>
+      </div>
       <button onClick={shuff}>打乱顺序</button>
     </div>
   );

@@ -1,9 +1,9 @@
 import { arrayToMap } from '@/utils/array';
 import { shallowEqualKeys } from '@/utils/object';
 import { uuid } from '@/utils/uuid';
-import { useCreation, useLatest, useUnmount } from 'ahooks';
+import { useCreation, useLatest } from 'ahooks';
 import { useEffect, useRef, useState } from 'react';
-import { TEqualityFn, TWatch, TComputed, IDispatchOptions, TSelectorFn } from './type';
+import { TEqualityFn, TWatch, TComputed, IDispatchOptions } from './type';
 import { calcComputedState, execWatchHandler } from './utils';
 
 type TSubscribeFunc<
@@ -247,6 +247,7 @@ export class Model<
         funcRef.current(this)
         needDispatchRef.current = false;
       }
+      // eslint-disable-next-line
     }, [this._dispatchSignal])
   }
 }
