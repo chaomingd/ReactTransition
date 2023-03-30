@@ -118,6 +118,7 @@ const App = () => {
         </button>
         <Transition visible={fadeVisible} transitionName="fade">
           {(status, transitionClassName) => {
+            console.log(status, transitionClassName)
             return (
               <div
                 className={classNames('demoRect', transitionClassName)}
