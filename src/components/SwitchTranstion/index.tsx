@@ -50,7 +50,6 @@ const enterRender = {
   [MODE.outIn]: ({ prevChildrenRef, currentChildRef, SwitchTransitionModel }) => {
     return cloneChild(prevChildrenRef.current, {
       visible: false,
-      dataKey: prevChildrenRef.current.key,
       onExited: () => {
         SwitchTransitionModel.setState({
           status: 'leave',
@@ -125,7 +124,15 @@ const SwitchTransition = ({
     }
     prevChildrenRef.current = currentChildRef.current;
     currentChildRef.current = child;
-    if (isSameChild(prevChildrenRef.current, child)) return;
+    if (isSameChild(prevChildrenRef.current, child)) {
+      SwitchTransitionModel.setState({
+        children: cloneChild(child, {
+          visible: true,
+        }),
+        status: 'none',
+      });
+      return
+    };
     SwitchTransitionModel.setState({
       status: 'enter'
     });

@@ -6,6 +6,7 @@ import Transition from './components/Transition';
 import classNames from 'classnames';
 import TransitionGroup from './components/TransitionGroup';
 import SwitchTransition from './components/SwitchTranstion';
+import { uuid } from './utils/uuid';
 
 const Flip = {
   first(els: HTMLElement[]) {
