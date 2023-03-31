@@ -29,7 +29,7 @@
 .switch-ani {
   &-enter {
     opacity: 0;
-    transform: translate(100%);
+    transform: translateX(100%);
   }
   &-entering,
   &-exiting {
@@ -37,6 +37,6 @@
   }
   &-exiting {
     opacity: 0;
-    transform: translate(-100%);
+    transform: translateX(-100%);
   }
 }
